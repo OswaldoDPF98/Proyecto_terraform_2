@@ -1,0 +1,49 @@
+# === Terraform files ===
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+
+# Local .terraform directories
+.terraform/
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Sensitive plan output
+*.tfplan
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# === IDE/editor files ===
+# VS Code
+.vscode/
+
+# JetBrains IDEs (IntelliJ, PyCharm, etc.)
+.idea/
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Logs and temporary files
+*.log
+*.bak
+*.swp
+*.tmp
+
+# SSH Keys (if you have any, be careful)
+*.pem
+*.key
+*.pub
+
+# === Lock files (if you want to ignore) ===
+# Uncomment the next line if you want to ignore the lock file
+.terraform.lock.hcl
