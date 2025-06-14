@@ -1,0 +1,1 @@
+Repositorio creado a partir de las indicaciones seguidas del video "Complete Terraform Course - From BEGINNER to PRO! (Learn Infrastructure as Code)" https://www.youtube.com/watch?v=7xngnjfIlK4&t=1s

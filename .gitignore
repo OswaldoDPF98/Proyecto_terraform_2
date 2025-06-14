@@ -1,28 +1,26 @@
-Oswaldo_accessKeys.csv
-
-# === Terraform files ===
+# === Archivos de Terraform ===
 *.tfstate
 *.tfstate.backup
 *.tfvars
 *.tfvars.json
 
-# Local .terraform directories
+# Directorios locales .terraform
 .terraform/
 
-# Crash logs
+# Registros de fallos
 crash.log
 crash.*.log
 
-# Sensitive plan output
+# Salida del plan sensible
 *.tfplan
 
-# Override files
+# Anular archivos
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
 
-# === IDE/editor files ===
+# === Archivos IDE/editor ===
 # VS Code
 .vscode/
 
@@ -35,17 +33,17 @@ override.tf.json
 # Linux
 *~
 
-# Logs and temporary files
+# Registros y archivos temporales
 *.log
 *.bak
 *.swp
 *.tmp
 
-# SSH Keys (if you have any, be careful)
+# Claves SSH (si tienes alguna, ten cuidado)
 *.pem
 *.key
 *.pub
 
-# === Lock files (if you want to ignore) ===
-# Uncomment the next line if you want to ignore the lock file
+# === Bloquear archivos (si desea ignorarlos) ===
+# Descomente la siguiente línea si desea ignorar el archivo de bloqueo
 .terraform.lock.hcl
