@@ -74,7 +74,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "instancia_uno" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  security_groups = [aws_security_group.grupo_seguridad.id]
+  vpc_security_group_ids = [aws_security_group.grupo_seguridad.id]
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
@@ -89,7 +89,7 @@ resource "aws_instance" "instancia_uno" {
 resource "aws_instance" "instancia_dos" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  security_groups = [aws_security_group.grupo_seguridad.id]
+  vpc_security_group_ids = [aws_security_group.grupo_seguridad.id]
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
