@@ -254,3 +254,15 @@ resource "aws_route53_record" "registro_dns" {
     evaluate_target_health = true
   }
 }
+
+resource "aws_db_instance" "base_datos" {
+  engine                  = "postgres"
+  engine_version          = "14.7"
+  instance_class          = "db.t2.micro"
+  allocated_storage       = 20
+  storage_type            = "standard"
+  username                = "admin"
+  password                = "password1234"
+  db_name                 = "mi_base_datos"
+  skip_final_snapshot     = true  
+}
