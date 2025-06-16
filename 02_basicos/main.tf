@@ -74,7 +74,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "instancia_uno" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  subnet_id     = aws_subnet.subnet_projecto_uno
+  subnet_id     = aws_subnet.subnet_projecto_uno.id
   vpc_security_group_ids = [aws_security_group.grupo_seguridad.id]
   user_data = <<-EOF
               #!/bin/bash
@@ -90,7 +90,7 @@ resource "aws_instance" "instancia_uno" {
 resource "aws_instance" "instancia_dos" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-    subnet_id     = aws_subnet.subnet_projecto_dos
+    subnet_id     = aws_subnet.subnet_projecto_dos.id
   vpc_security_group_ids = [aws_security_group.grupo_seguridad.id]
   user_data = <<-EOF
               #!/bin/bash
@@ -244,7 +244,10 @@ resource "aws_lb" "balanceador_carga" {
   name               = "balanceador-carga"
   load_balancer_type = "application"
   security_groups    = [aws_security_group.grupo_seguridad_lb.id]
-  subnets            = [aws_subnet.subnet_projecto_uno, aws_subnet.subnet_projecto_dos.id]  
+  subnets            = [
+    aws_subnet.subnet_projecto_uno.id,
+    aws_subnet.subnet_projecto_dos.id
+]  
 }
 
 resource "aws_route53_zone" "zona_dns" {
