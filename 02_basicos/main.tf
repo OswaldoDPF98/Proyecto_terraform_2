@@ -132,3 +132,15 @@ resource "aws_subnet" "subnet_projecto" {
   vpc_id            = aws_vpc.vpc_projecto.id  
 }
 
+resource "aws_security_group" "grupo_seguridad" {
+  name        = "grupo_seguridad"
+  description = "Grupo de seguridad para el proyecto"
+  vpc_id      = aws_vpc.vpc_projecto.id
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0/0"]
+}
+
