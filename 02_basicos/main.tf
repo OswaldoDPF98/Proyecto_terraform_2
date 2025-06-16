@@ -128,4 +128,7 @@ resource "aws_vpc" "vpc_projecto" {
   cidr_block = "10.0.0.0/16"
 }
 
+resource "aws_subnet" "subnet_projecto" {
+  vpc_id            = aws_vpc.vpc_projecto.id  
+}
 
