@@ -191,6 +191,22 @@ resource "aws_lb_target_group_attachment" "instancia_dos" {
   
 }
 
+resource "aws_lb_listener_rule" "instancias" {
+  listener_arn = aws_lb_listener.http_listener.arn
+    priority     = 100
+
+    condition {
+      path_pattern {
+        values = ["*"]
+      }
+    }
+
+    action {
+        type             = "forward"
+        target_group_arn = aws_lb_target_group.instancias.arn
+    }
+}
+
 resource "aws_security_group" "grupo_seguridad_lb" {
   name        = "grupo_seguridad_lb"
   description = "Grupo de seguridad para el balanceador de carga"
