@@ -74,7 +74,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "instancia_uno" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  security_groups = 
+  security_groups = aws_security_group.grupo_seguridad.id
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
@@ -89,7 +89,7 @@ resource "aws_instance" "instancia_uno" {
 resource "aws_instance" "instancia_dos" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  security_groups = 
+  security_groups = aws_security_group.grupo_seguridad.id
   user_data = <<-EOF
               #!/bin/bash
               apt-get update
@@ -141,8 +141,7 @@ resource "aws_security_group" "grupo_seguridad" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0/0"]
-
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -158,6 +157,7 @@ resource "aws_lb_listener" "http_listener" {
       message_body = "404: página no encontrada"
       status_code  = "404"
   }
+}
 }
 
 resource "aws_lb_target_group" "instancias" {
@@ -189,5 +189,10 @@ resource "aws_lb_target_group_attachment" "instancia_dos" {
   target_id        = aws_instance.instancia_dos.id
   port             = 8080
   
+}
+
+resource "aws_security_group" "grupo_seguridad_lb" {
+  name        = "grupo_seguridad_lb"
+  description = "Grupo de seguridad para el balanceador de carga"
 }
 
