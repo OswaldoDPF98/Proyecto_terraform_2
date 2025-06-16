@@ -80,7 +80,7 @@ resource "aws_instance" "instancia_uno" {
               apt-get update
               apt-get install -y python3
               mkdir -p /var/www/html
-              echo "Hola, mundo!" > /var/www/html/index.html
+              echo "Hola, mundo 1!" > /var/www/html/index.html
               cd /var/www/html
               nohup python3 -m http.server 8080 &
               EOF
@@ -95,8 +95,32 @@ resource "aws_instance" "instancia_dos" {
               apt-get update
               apt-get install -y python3
               mkdir -p /var/www/html
-              echo "Hola, mundo!" > /var/www/html/index.html
+              echo "Hola, mundo 2!" > /var/www/html/index.html
               cd /var/www/html
               nohup python3 -m http.server 8080 &
               EOF
 }
+
+resource "aws_s3_bucket" "bucket_ejemplo" {
+  bucket = "directorio-terraform-ejemplo"
+  force_destroy = true
+}
+
+resource "aws_s3_bucket_versioning" "version_bucket_ejemplo" {
+  bucket = aws_s3_bucket.bucket_ejemplo.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "version_bucket_ejemplo_encriptacion" {
+  bucket = aws_s3_bucket.bucket_ejemplo.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
