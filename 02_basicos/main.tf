@@ -239,3 +239,18 @@ resource "aws_lb" "balanceador_carga" {
   subnets            = [aws_subnet.subnet_projecto.id]  
 }
 
+resource "aws_route53_zone" "zona_dns" {
+  name = "dev.local."
+}
+
+resource "aws_route53_record" "registro_dns" {
+  zone_id = aws_route53_zone.zona_dns.zone_id
+  name    = "ejemplo.dev.local"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.balanceador_carga.dns_name
+    zone_id                = aws_lb.balanceador_carga.zone_id
+    evaluate_target_health = true
+  }
+}
