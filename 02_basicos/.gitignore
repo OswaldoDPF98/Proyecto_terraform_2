@@ -1,0 +1,49 @@
+# === Archivos de Terraform ===
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+
+# Directorios locales .terraform
+.terraform/
+
+# Registros de fallos
+crash.log
+crash.*.log
+
+# Salida del plan sensible
+*.tfplan
+
+# Anular archivos
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# === Archivos IDE/editor ===
+# VS Code
+.vscode/
+
+# JetBrains IDEs (IntelliJ, PyCharm, etc.)
+.idea/
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Registros y archivos temporales
+*.log
+*.bak
+*.swp
+*.tmp
+
+# Claves SSH (si tienes alguna, ten cuidado)
+*.pem
+*.key
+*.pub
+
+# === Bloquear archivos (si desea ignorarlos) ===
+# Descomente la siguiente línea si desea ignorar el archivo de bloqueo
+.terraform.lock.hcl
