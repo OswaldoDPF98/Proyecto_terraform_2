@@ -137,7 +137,7 @@ resource "aws_subnet" "subnet_projecto_uno" {
 
 resource "aws_subnet" "subnet_projecto_dos" {
   vpc_id            = aws_vpc.vpc_projecto.id
-  cidr_block        = "10.0.1.0/24"
+  cidr_block        = "10.0.2.0/24"
 }
 
 resource "aws_security_group" "grupo_seguridad" {
@@ -277,7 +277,7 @@ resource "aws_db_instance" "base_datos" {
   instance_class          = "db.t3.micro"
   allocated_storage       = 20
   storage_type            = "standard"
-  username                = "admin"
+  username                = "miusuario"
   password                = "password1234"
   db_name                 = "mi_base_datos"
   skip_final_snapshot     = true  
