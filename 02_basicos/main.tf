@@ -244,6 +244,7 @@ resource "aws_lb_listener_rule" "instancias" {
 resource "aws_security_group" "grupo_seguridad_lb" {
   name        = "grupo_seguridad_lb"
   description = "Grupo de seguridad para el balanceador de carga"
+  vpc_id = aws_vpc.vpc_projecto.id
 }
 
 resource "aws_security_group_rule" "permitir_http_ingreso" {
