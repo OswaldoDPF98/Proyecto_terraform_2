@@ -232,3 +232,10 @@ resource "aws_security_group_rule" "permitir_http_egreso" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
+resource "aws_lb" "balanceador_carga" {
+  name               = "balanceador-carga"
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.grupo_seguridad_lb.id]
+  subnets            = [aws_subnet.subnet_projecto.id]  
+}
+
