@@ -1,4 +1,12 @@
 terraform {
+backend "s3" {
+    bucket         = "directorio-terraform-estado"
+    key            = "02_basicos/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "bloqueo-terraform"
+    encrypt        = true
+}
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -15,16 +23,24 @@ provider "aws" {
 resource "aws_s3_bucket" "estado_terraform" {
   bucket = "directorio-terraform-estado"
   force_destroy = true
-  versioning {
-    enabled = true
-  }
+}
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
+resource "aws_s3_bucket_server_side_encryption_configuration" "estado_terraform_encriptacion" {
+  bucket = aws_s3_bucket.estado_terraform.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
+  }
+  
+}
+
+resource "aws_s3_bucket_versioning" "estado_terraform_versioning" {
+  bucket = aws_s3_bucket.estado_terraform.id
+
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
