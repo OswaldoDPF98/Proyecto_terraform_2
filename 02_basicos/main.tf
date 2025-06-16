@@ -131,7 +131,8 @@ resource "aws_vpc" "vpc_projecto" {
 }
 
 resource "aws_subnet" "subnet_projecto" {
-  vpc_id            = aws_vpc.vpc_projecto.id  
+  vpc_id            = aws_vpc.vpc_projecto.id
+  cidr_block        = "10.0.1.0/24"
 }
 
 resource "aws_security_group" "grupo_seguridad" {
@@ -257,9 +258,14 @@ resource "aws_route53_record" "registro_dns" {
   }
 }
 
+data "aws_rds_engine_version" "ultima_version_postgres" {
+  engine = "postgres"
+}
+
+
 resource "aws_db_instance" "base_datos" {
   engine                  = "postgres"
-  engine_version          = "14.7"
+  engine_version          = "${data.aws_rds_engine_version.ultima_version_postgres.version}"
   instance_class          = "db.t2.micro"
   allocated_storage       = 20
   storage_type            = "standard"
