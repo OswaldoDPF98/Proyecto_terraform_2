@@ -1,10 +1,11 @@
 terraform {
-backend "s3" {
+  backend "s3" {
     bucket         = "directorio-terraform-estado"
-    key            = "02_basicos/terraform.tfstate"
+    key            = "estado/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "bloqueo-terraform"
     encrypt        = true
+  }
 }
 
   required_providers {
