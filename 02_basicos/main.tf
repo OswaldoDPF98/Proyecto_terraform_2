@@ -142,6 +142,11 @@ resource "aws_subnet" "subnet_projecto_dos" {
   cidr_block        = "10.0.2.0/24"
 }
 
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = aws_vpc.vpc_projecto.id
+}
+
+
 resource "aws_security_group" "grupo_seguridad" {
   name        = "grupo_seguridad"
   description = "Grupo de seguridad para el proyecto"
