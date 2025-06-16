@@ -101,21 +101,21 @@ resource "aws_instance" "instancia_dos" {
               EOF
 }
 
-resource "aws_s3_bucket" "bucket_ejemplo" {
+resource "aws_s3_bucket" "bucket_proyecto" {
   bucket = "directorio-terraform-ejemplo"
   force_destroy = true
 }
 
-resource "aws_s3_bucket_versioning" "version_bucket_ejemplo" {
-  bucket = aws_s3_bucket.bucket_ejemplo.id
+resource "aws_s3_bucket_versioning" "version_bucket_proyecto" {
+  bucket = aws_s3_bucket.bucket_proyecto.id
 
   versioning_configuration {
     status = "Enabled"
   }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "version_bucket_ejemplo_encriptacion" {
-  bucket = aws_s3_bucket.bucket_ejemplo.id
+resource "aws_s3_bucket_server_side_encryption_configuration" "version_bucket_proyecto_encriptacion" {
+  bucket = aws_s3_bucket.bucket_proyecto.id
 
   rule {
     apply_server_side_encryption_by_default {
@@ -123,4 +123,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "version_bucket_ej
     }
   }
 }
+
+resource "aws_vpc" "vpc_projecto" {
+  cidr_block = "10.0.0.0/16"
+}
+
 
