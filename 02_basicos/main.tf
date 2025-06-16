@@ -212,3 +212,23 @@ resource "aws_security_group" "grupo_seguridad_lb" {
   description = "Grupo de seguridad para el balanceador de carga"
 }
 
+resource "aws_security_group_rule" "permitir_http_ingreso" {
+  type              = "ingress"
+  security_group_id = aws_security_group.grupo_seguridad_lb.id
+
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "permitir_http_egreso" {
+  type              = "egress"
+  security_group_id = aws_security_group.grupo_seguridad_lb.id
+
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
