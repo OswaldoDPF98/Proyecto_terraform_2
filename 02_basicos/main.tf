@@ -271,7 +271,7 @@ data "aws_rds_engine_version" "ultima_version_postgres" {
 resource "aws_db_instance" "base_datos" {
   engine                  = "postgres"
   engine_version          = "${data.aws_rds_engine_version.ultima_version_postgres.version}"
-  instance_class          = "db.t2.micro"
+  instance_class          = "db.t3.micro"
   allocated_storage       = 20
   storage_type            = "standard"
   username                = "admin"
