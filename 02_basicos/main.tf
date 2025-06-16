@@ -146,6 +146,14 @@ resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc_projecto.id
 }
 
+resource "aws_route_table" "public_rt" {
+  vpc_id = aws_vpc.vpc_projecto.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.internet_gateway.id
+  }
+}
 
 resource "aws_security_group" "grupo_seguridad" {
   name        = "grupo_seguridad"
