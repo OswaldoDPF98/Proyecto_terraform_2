@@ -54,3 +54,49 @@ resource "aws_dynamodb_table" "bloqueo_terraform" {
     type = "S"
   } 
 }
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "instancia_uno" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t2.micro"
+  security_groups = 
+  user_data = <<-EOF
+              #!/bin/bash
+              apt-get update
+              apt-get install -y python3
+              mkdir -p /var/www/html
+              echo "Hola, mundo!" > /var/www/html/index.html
+              cd /var/www/html
+              nohup python3 -m http.server 8080 &
+              EOF
+}
+
+resource "aws_instance" "instancia_dos" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t2.micro"
+  security_groups = 
+  user_data = <<-EOF
+              #!/bin/bash
+              apt-get update
+              apt-get install -y python3
+              mkdir -p /var/www/html
+              echo "Hola, mundo!" > /var/www/html/index.html
+              cd /var/www/html
+              nohup python3 -m http.server 8080 &
+              EOF
+}
